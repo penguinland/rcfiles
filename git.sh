@@ -58,6 +58,19 @@ gamend () {
     fi
 }
 
+# Run fixup to commit all modified files as a fixup commit to the most recent
+# commit whose description contains our argument as a substring. For more on
+# fixup commits, see
+# https://fle.github.io/git-tip-keep-your-branch-clean-with-fixup-and-autosquash.html
+fixup() {
+    tmp_current_branch=$(git symbolic-ref --short HEAD)
+    if [[ "$tmp_current_branch" == "$BASE_BRANCH_NAME" ]]; then
+        echo "ERROR: Don't commit things on $BASE_BRANCH_NAME."
+    else
+        git commit -a --fixup :/$1
+    fi
+}
+
 # Run push to push the currently checked-out feature branch to your repo. This
 # will force-push local changes unless they'd overwrite someone else's changes
 # to the remote server, so you can update the remote branch even if you've
