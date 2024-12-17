@@ -30,8 +30,8 @@ delete() {
 # been on previously.
 deletecurrentbranch() {
     tmp_current_branch=$(git symbolic-ref --short HEAD)
-	mainb
-	delete "$tmp_current_branch"
+    mainb
+    delete "$tmp_current_branch"
 }
 
 # Run `commit "description of changes"` to create a commit of all modified files
@@ -63,14 +63,14 @@ gamend () {
 # to the remote server, so you can update the remote branch even if you've
 # just gone through a rebase.
 push() {
-	if [[ "$MY_REPO_NAME" == "$MAIN_REPO_NAME" ]]; then
-		tmp_current_branch=$(git symbolic-ref --short HEAD)
-		if [[ "$tmp_current_branch" == "$BASE_BRANCH_NAME" ]]; then
-			echo "WARNING: Think carefully about pushing $BASE_BRANCH_NAME."
-			return 1
-		fi
-	fi
-	git push $MY_REPO_NAME $(git symbolic-ref --short HEAD) --force-with-lease
+    if [[ "$MY_REPO_NAME" == "$MAIN_REPO_NAME" ]]; then
+        tmp_current_branch=$(git symbolic-ref --short HEAD)
+        if [[ "$tmp_current_branch" == "$BASE_BRANCH_NAME" ]]; then
+            echo "WARNING: Think carefully about pushing $BASE_BRANCH_NAME."
+            return 1
+        fi
+    fi
+    git push $MY_REPO_NAME $(git symbolic-ref --short HEAD) --force-with-lease
 }
 
 # Pulls the current branch from github, assuming its history has not been
